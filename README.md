@@ -64,6 +64,13 @@ erDiagram
   }
 
 ```
+## ETL Pipeline (etl_lib.py)
+
+The pipeline consists of three main steps:
+
+1. **Load Parquet** – read data from `.parquet` files  
+2. **Transform** – clean and process the data  
+3. **Load to Postgres** – load the transformed data into the database following the designed schema  
 
 ## Quick Start
 
