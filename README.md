@@ -77,6 +77,7 @@ erDiagram
 *This generates .parquet files in data_sample/ folder)
 
 - **Start services by docker**
+  - *Requires to change env file to .env before run docker*
   ```bash
   docker compose up -d
   ```
