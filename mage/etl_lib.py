@@ -101,13 +101,7 @@ def execute_chunks(conn, sql: str, rows: list, chunk: int = BATCH_SIZE):
         conn.execute(text(sql), rows[i:i+chunk])
 
 def load_into_postgres(parts: dict, db_url: str | None = None, batch_size: int = BATCH_SIZE):
-    """
-    parts:
-      - departments: columns -> name
-      - sensors:     columns -> serial, department_name
-      - products:    columns -> name
-      - logs:      columns -> serial, product_name, create_at, product_expire
-    """
+
     db_url = db_url or get_db_url_from_env()
     engine = create_engine(db_url, future=True)
 
@@ -116,7 +110,7 @@ def load_into_postgres(parts: dict, db_url: str | None = None, batch_size: int =
     df_product = parts["products"]
     df_logs  = parts["logs"].copy()
 
-    # สร้างตารางจากไฟล์ schema ก่อน
+    # Create table from schema
     run_schema_sql(schema_path="/home/src/sql/schema.sql", db_url=db_url)
 
     with engine.begin() as conn:
